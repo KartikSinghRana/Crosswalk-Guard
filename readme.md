@@ -1,172 +1,152 @@
-\# 🚶 CrosswalkGuard
+# 🚶 CrosswalkGuard
 
-
-
-An Android safety app that detects when you're approaching a pedestrian crosswalk while distracted on your phone — and escalates alerts before you step into traffic.
-
-
+An Android safety app that detects when you're approaching a pedestrian crosswalk
+while distracted on your phone — and escalates alerts before you step into traffic.
 
 ---
 
-
-
-\## 📱 Screenshots
-
-
+## 📱 Screenshots
 
 | Map View | Level 2 Alert | Level 3 — STOP |
-
 |----------|--------------|-----------------|
-
-| !\[Map](screenshots/map\_view.png) | !\[Alert](screenshots/alert\_level2.png) | !\[Stop](screenshots/alert\_level3.png) |
-
-
+| ![Map](screenshots/map_view.png) | ![Alert](screenshots/alert_level2.png) | ![Stop](screenshots/alert_level3.png) |
 
 ---
 
+## ✨ Features
 
-
-\## ✨ Features
-
-
-
-\- 📍 \*\*Real-time GPS tracking\*\* with 1-second location updates
-
-\- 🗺️ \*\*Crosswalk detection\*\* via OpenStreetMap Overpass API (3-mirror parallel racing for speed)
-
-\- 📵 \*\*Phone distraction detection\*\* via accelerometer/gravity sensor tilt analysis
-
-\- 🔵 \*\*Custom zebra-crossing map markers\*\* (blue = OSM verified, amber = estimated)
-
-\- ⭕ \*\*Adjustable search radius\*\* — 100m up to 5km with live map circle overlay
-
-\- 🔄 \*\*Manual refresh\*\* button to force re-fetch crosswalk data
-
-\- 📊 \*\*Persistent analytics\*\* — distractions prevented \& crosswalks approached
-
-\- 🚨 \*\*Three-level escalating alerts:\*\*
-
-&nbsp; - Level 1 (30m): Toast + double vibration
-
-&nbsp; - Level 2 (12m): Modal popup + vibration pattern + warning tone
-
-&nbsp; - Level 3 (7m): Full-screen red takeover + emergency tone (non-dismissible until acknowledged)
-
-
+- 📍 **Real-time GPS tracking** with 1-second location updates
+- 🗺️ **Crosswalk detection** via OpenStreetMap Overpass API (3-mirror parallel racing for speed)
+- 📵 **Phone distraction detection** via accelerometer/gravity sensor tilt analysis
+- 🔵 **Custom zebra-crossing map markers** (blue = OSM verified, amber = estimated)
+- ⭕ **Adjustable search radius** — 100m up to 5km with live map circle overlay
+- 🔄 **Manual refresh** button to force re-fetch crosswalk data
+- 📊 **Persistent analytics** — distractions prevented & crosswalks approached
+- 🚨 **Three-level escalating alerts:**
+  - Level 1 (30m): Toast + double vibration
+  - Level 2 (12m): Modal popup + vibration pattern + warning tone
+  - Level 3 (7m): Full-screen red takeover + emergency tone (non-dismissible until acknowledged)
 
 ---
 
-
-
-\## 🛠️ Tech Stack
-
-
+## 🛠️ Tech Stack
 
 | Layer | Technology |
-
 |---|---|
-
 | Language | Kotlin |
-
 | Min SDK | API 26 (Android 8.0) |
-
 | Target SDK | API 35 (Android 15) |
-
 | Maps | Google Maps SDK for Android |
-
 | Location | Google Play Services — FusedLocationProvider |
-
 | Crosswalk Data | OpenStreetMap Overpass API |
-
 | Networking | OkHttp 4.12 |
-
 | Concurrency | Kotlin Coroutines |
-
 | Sensor | Android Gravity / Accelerometer |
-
 | Storage | SharedPreferences |
-
 | UI | View Binding, Material3, ConstraintLayout |
 
+---
 
+## ⚙️ Installation
+
+### Prerequisites
+- Android Studio Narwhal (2025.1.x) or later
+- Android device or emulator running API 26+
+- Google Maps API key with **Maps SDK for Android** enabled
+
+### Steps
+
+1. **Clone the repository**
+```bash
+   git clone https://github.com/yourusername/CrosswalkGuard.git
+   cd CrosswalkGuard
+```
+
+2. **Add your Google Maps API key**
+
+   Copy the example config file:
+```bash
+   cp google_maps_api.xml.example app/src/main/res/values/google_maps_api.xml
+```
+   Then open `google_maps_api.xml` and replace `YOUR_API_KEY_HERE` with your key.
+
+3. **Open in Android Studio**
+   - File → Open → select the `CrosswalkGuard` folder
+   - Wait for Gradle sync to complete
+
+4. **Run**
+   - Connect a physical device (recommended — emulators lack real GPS)
+   - Press `Shift+F10` or click ▶ Run
 
 ---
 
+## 🚀 Usage
 
-
-\## ⚙️ Installation
-
-
-
-\### Prerequisites
-
-\- Android Studio Narwhal (2025.1.x) or later
-
-\- Android device or emulator running API 26+
-
-\- Google Maps API key with \*\*Maps SDK for Android\*\* enabled
-
-
-
-\### Steps
-
-1\. \*\*Clone the repository\*\*
-
-bash ```git clone https://github.com/yourusername/CrosswalkGuard.git 
-
-db CrosswalkGuard``` 
-
-to clone the project.
-
-2\. \*\*Add your Google Maps API key\*\*
-
-to the config file:
-
-bash ```cp google\_maps\_api.xml.example app/src/main/res/values/google\_maps\_api.xml``` 
-
-and replace `YOUR\_API\_KEY\_HERE` with your actual key.
-
-3\. \*\*Open in Android Studio\*\*
-
-after cloning:
-
-follows by opening the folder and syncing Gradle.
-
-4\. \*\*Run the app\*\* by connecting a device and clicking run.
+1. Launch the app and grant **Location** permission
+2. The map loads centered on your current position
+3. Blue markers = verified OSM crosswalks · Amber markers = estimated intersections
+4. Blue circle = your current search radius (adjustable with − / + buttons)
+5. Keep the app open while walking — it monitors your phone tilt continuously
+6. When you hold your phone up (reading posture) near a crosswalk, alerts fire automatically
+7. Tap 🔄 to force a fresh crosswalk fetch at any time
 
 ---
 
-\## 🚀 Usage
+## 🔑 API Key Setup
 
-1\. Launch the app and grant Location permission.
+Go to [Google Cloud Console](https://console.cloud.google.com/) and enable:
+- Maps SDK for Android
 
-2\. The map loads centered on your current position.
-
-3\. Blue markers = verified OSM crosswalks; Amber markers = estimated intersections.
-
-4\. Blue circle indicates your current search radius, adjustable with − / + buttons.
-
-5\. Keep the app open while walking; it monitors phone tilt continuously.
-
-6\. When near a crosswalk, alerts fire automatically.
-
-e7. Tap 🔄 to fetch fresh data anytime.
+Restrict the key to your app's package name `com.crosswalkguard` and SHA-1
+fingerprint for security before publishing.
 
 ---
 
-\## 🔑 API Key Setup
+## 📂 Key Files
 
-Visit \[Google Cloud Console](https://console.cloud.google.com/) and enable:
+| File | Purpose |
+|---|---|
+| `MainActivity.kt` | App entry point, map, location loop, UI |
+| `CrosswalkRepository.kt` | OSM Overpass fetch with parallel mirrors + cache |
+| `DistractionDetector.kt` | Gravity sensor tilt detection |
+| `AlertManager.kt` | Three-level alert escalation logic |
+| `AnalyticsManager.kt` | SharedPreferences-backed session stats |
+| `AlertLevel.kt` | Enum: NONE / APPROACHING / CLOSE / ENTERING |
 
-such as Maps SDK for Android.
+---
 
-to restrict access, set package name `com.crosswalkguard` and SHA-1 fingerprint for security before publishing.
+## 🔮 Roadmap
 
-'these steps ensure proper setup of your API key.'
+- [ ] Background service mode (alerts even when screen is off)
+- [ ] Notification channel for Level 1 alerts
+- [ ] Speed-based trigger (only alert when walking, not in a vehicle)
+- [ ] Historical session log screen
+- [ ] Offline crosswalk tile cache
+- [ ] Wear OS companion app
 
-defaults to secure usage of Google services in your app.
+---
 
-'thanks for using CrosswalkGuard!'
+## 👥 Contributing
 
-details about licensing, acknowledgements, and contribution guidelines follow below.
+Pull requests are welcome. For major changes please open an issue first to
+discuss what you would like to change.
 
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+## 🙏 Acknowledgements
+
+- [OpenStreetMap](https://www.openstreetmap.org/) & [Overpass API](https://overpass-api.de/) for crosswalk data
+- [Google Maps SDK for Android](https://developers.google.com/maps/documentation/android-sdk)
+- Built with ❤️ at Amity University — IBD Semester Project
