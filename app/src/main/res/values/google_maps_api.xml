@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Replace YOUR_API_KEY_HERE with your actual Google Maps API key.
+        Enable in Google Cloud Console:
+          - Maps SDK for Android
+          - Places API
+    -->
+    <string name="AIzaSyAA82OMhIv20RdmOgcVT9Wx3AG_c8dJM9c" translatable="false">YOUR_API_KEY_HERE</string>
+</resources>

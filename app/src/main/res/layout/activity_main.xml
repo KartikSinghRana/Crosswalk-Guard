@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Full-bleed Map -->
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="🛡  ON"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            app:chipBackgroundColor="@color/brand_blue"
+            app:chipCornerRadius="20dp"
+            app:chipStrokeWidth="0dp"
+            android:layout_marginEnd="8dp"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="✅  Eyes on road"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            app:chipBackgroundColor="@color/safe_green"
+            app:chipCornerRadius="20dp"
+            app:chipStrokeWidth="0dp"/>
+
+    </LinearLayout>
+
+    <!-- My Location FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMyLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="180dp"
+        android:src="@drawable/ic_my_location"
+        android:contentDescription="Center on my location"
+        app:backgroundTint="@color/white"
+        app:tint="@color/brand_blue"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Bottom Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bottomCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Proximity label -->
+            <TextView
+                android:id="@+id/tvCrosswalkDistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Searching for crosswalks…"
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="sans-serif-medium"/>
+
+            <!-- Proximity bar -->
+            <ProgressBar
+                android:id="@+id/proximityBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginBottom="16dp"
+                android:max="100"
+                android:progress="0"
+                android:progressBackgroundTint="@color/divider"/>
+
+            <!-- Radius control row -->
+            <!-- Radius control row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Search radius"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary"/>
+
+                <ImageButton
+                    android:id="@+id/btnRadiusMinus"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@android:drawable/ic_input_delete"
+                    android:background="@drawable/bg_stat"
+                    android:contentDescription="Decrease radius"
+                    android:padding="6dp"/>
+
+                <TextView
+                    android:id="@+id/tvRadius"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="500m"
+                    android:textSize="15sp"
+                    android:textColor="@color/brand_blue"
+                    android:fontFamily="sans-serif-black"/>
+
+                <ImageButton
+                    android:id="@+id/btnRadiusPlus"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@android:drawable/ic_input_add"
+                    android:background="@drawable/bg_stat"
+                    android:contentDescription="Increase radius"
+                    android:padding="6dp"/>
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="0dp"/>
+
+                <ImageButton
+                    android:id="@+id/btnRefreshCrosswalks"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@android:drawable/stat_notify_sync"
+                    android:background="@drawable/bg_refresh"
+                    android:contentDescription="Refresh crosswalk data"
+                    android:padding="7dp"/>
+
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                android:layout_marginBottom="14dp"/>
+
+            <!-- Stats -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/bg_stat"
+                    android:layout_marginEnd="6dp"
+                    android:padding="12dp">
+                    <TextView
+                        android:id="@+id/tvStatDistracted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="26sp"
+                        android:textColor="@color/brand_blue"
+                        android:fontFamily="sans-serif-black"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Distractions&#10;Prevented"
+                        android:textSize="11sp"
+                        android:gravity="center"
+                        android:textColor="@color/text_secondary"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/bg_stat"
+                    android:layout_marginStart="6dp"
+                    android:padding="12dp">
+                    <TextView
+                        android:id="@+id/tvStatCrosswalks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="26sp"
+                        android:textColor="@color/brand_blue"
+                        android:fontFamily="sans-serif-black"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Crosswalks&#10;Approached"
+                        android:textSize="11sp"
+                        android:gravity="center"
+                        android:textColor="@color/text_secondary"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
